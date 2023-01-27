@@ -1,18 +1,24 @@
 const mongoose = require('mongoose');
 const userSchema = mongoose.Schema({
-  nik: {
+  nama: {
     type: String,
     required: true,
-    value: 16,
   },
-  role: {
+  email: {
     type: String,
     required: true,
     max: 100,
   },
+  nama_kabupaten_kota: {
+    type: String,
+    required: true,
+  },
+  jenis_kelamin: {
+    type: String,
+    required: true,
+  },
   password: {
     type: String,
-    unique: true,
     required: true,
     min: 6,
     max: 1024,

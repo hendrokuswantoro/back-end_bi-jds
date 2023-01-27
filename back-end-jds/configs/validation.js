@@ -2,8 +2,10 @@ const Joi = require('@hapi/joi');
 
 const registerValidation = (data) => {
   const schema = Joi.object({
-    nik: Joi.string().min(16).max(16).required(),
-    role: Joi.string().required(),
+    nama: Joi.string().required(),
+    email: Joi.string().email().required(),
+    nama_kabupaten_kota: Joi.string().required(),
+    jenis_kelamin: Joi.string().required(),
     password: Joi.string().min(6).required(),
   });
 
@@ -12,7 +14,7 @@ const registerValidation = (data) => {
 
 const loginValidation = (data) => {
   const schema = Joi.object({
-    nik: Joi.string().nik().value(16).required(),
+    email: Joi.string().email().required(),
     password: Joi.string().min(6).required(),
   });
 

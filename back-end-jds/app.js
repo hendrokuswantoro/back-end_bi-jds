@@ -10,18 +10,18 @@ app.use(bodyParser());
 app.use(cors());
 
 // import routes
-const dataRoutes = require('./routes/data');
+const guruJabarRoutes = require('./routes/guruJabar');
 const userRoutes = require('./routes/auth');
 
 // ruoutes
-app.use('/api/data', dataRoutes);
+app.use('/api/guruJabar', guruJabarRoutes);
 app.use('/api/user', userRoutes);
 
 // connect to DB
 mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true });
 let db = mongoose.connection;
 
-db.on('error', console.error.bind(console, 'Database connect Error!'));
+db.on('error', console.error.bind(console, 'Database Connect Error!'));
 db.once('open', () => {
   console.log('Database is Connected');
 });

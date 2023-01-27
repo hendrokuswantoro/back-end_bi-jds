@@ -18,21 +18,23 @@ router.post('/register', async (req, res) => {
       message: error.details[0].message,
     });
 
-  // If NIK exist
-  const nikExist = await User.findOne({ nik: req.body.nik });
-  if (nikExist)
+  // If email exist
+  const emailExist = await User.findOne({ email: req.body.email });
+  if (emailExist)
     return res.status(400).json({
       status: res.statusCode,
-      message: 'NIK sudah digunakan!',
+      message: 'Email sudah digunakan!',
     });
 
-  // Hash Password
+  // hash password
   const salt = await bcrypt.genSalt(10);
   const hashPassword = await bcrypt.hash(req.body.password, salt);
 
   const user = new User({
-    nik: req.body.nik,
-    role: req.body.role,
+    nama: req.body.nama,
+    email: req.body.email,
+    nama_kabupaten_kota: req.body.nama_kabupaten_kota,
+    jenis_kelamin: req.body.jenis_kelamin,
     password: hashPassword,
   });
 
@@ -48,14 +50,14 @@ router.post('/register', async (req, res) => {
   }
 });
 
-// Login
+// login
 router.post('/login', async (req, res) => {
-  // if nik exist
-  const user = await User.findOne({ nik: req.body.nik });
+  // if email exist
+  const user = await User.findOne({ email: req.body.email });
   if (!user)
     return res.status(400).json({
       status: res.statusCode,
-      message: 'NIK Anda Salah!',
+      message: 'Email Anda Salah!',
     });
 
   // check password
